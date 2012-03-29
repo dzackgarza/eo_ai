@@ -44,6 +44,20 @@ class EvenOdd
         this.playerMove= 1;
     }
     
+     /**
+    * switchPlayerMove: none-->none
+    * Alternates turns between the players, called from within each move function.
+    */
+    void switchPlayerMove()
+    {   
+        if (this.playerMove== 1)
+        {
+            this.playerMove=2;
+        }
+        else if (this.playerMove == 2)
+            this.playerMove=1;
+    
+    }
     
     /**
      * p1move : amount (int) -> boolean
@@ -168,30 +182,4 @@ class EvenOdd
         return "Pile: " + this.pile + ", p1: " + this.p1 + ", p2: " + this.p2;
     }
     
-    
-    /**
-    * switchPlayerMove: none-->none
-    * Alternates turns between the players, called from within each move function.
-    */
-    void switchPlayerMove()
-    {   
-        if (this.playerMove== 1)
-            this.playerMove=2;
-        else if (this.playerMove == 2)
-            this.playerMove=1;
-    
-    }
- 
-
-    
-    /**
-     * Reset all of the variables for testing purposes or a new game.
-     */
-    void resetGame ()
-    {
-        this.pile= 15;
-        this.p1= 0;
-        this.p2= 0;
-        this.playerMove= 1;
-    }
 }

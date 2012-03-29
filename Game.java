@@ -57,10 +57,13 @@ public class Game extends Program
         
         this.p2take1= new JButton(this.Mog);
         this.p2take1.setActionCommand("p2t1");
+        this.p2take1.setEnabled(false);
         this.p2take2= new JButton("Take 2");
         this.p2take2.setActionCommand("p2t2");
+        this.p2take2.setEnabled(false);
         this.p2take3= new JButton("Take 3");
         this.p2take3.setActionCommand("p2t3");
+        this.p2take3.setEnabled(false);
         
         this.newGame= new JButton("New Game");
         this.newGame.setActionCommand("ng");
@@ -76,22 +79,25 @@ public class Game extends Program
         gameArea.add(p2take2);
         gameArea.add(p1take3);
         gameArea.add(new JLabel(" "));
-        gameArea.add(p2take3);          
+        gameArea.add(p2take3);   
         
-        p1pile.setFont(new Font("Old English Text MT", Font.BOLD, 36));
-        p2pile.setFont(new Font("Old English Text MT", Font.BOLD, 36));
-        pile.setFont(new Font("Old English Text MT", Font.BOLD, 36));
+        pile.setFont(new Font("Old English Text MT", Font.BOLD, 22));
+        p1pile.setFont(new Font("Old English Text MT", Font.BOLD, 22));
+        p2pile.setFont(new Font("Old English Text MT", Font.BOLD, 22));
+        
+        pile.setHorizontalAlignment(SwingConstants.CENTER);
         p1pile.setHorizontalAlignment(SwingConstants.CENTER);
         p2pile.setHorizontalAlignment(SwingConstants.CENTER);
-        pile.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        pile.setForeground(this.goldenrod3);
         p1pile.setForeground(Color.blue);
         p2pile.setForeground(Color.green);
-        pile.setForeground(this.goldenrod3);
         
         doodleSpace= new GCanvas();
         gameBoard= new VPanel();
         gameBoard.add(doodleSpace);
         gameBoard.add(gameArea);
+        
         this.add(gameBoard);
         
         this.addActionListeners();
@@ -100,11 +106,55 @@ public class Game extends Program
         
         this.title= new JLabel("Even and Odd!");
 
-        title.setFont(new Font("Stencil", Font.BOLD, 22));
+        title.setFont(new Font("Stencil", Font.BOLD, 16));
         doodleSpace.add(title);
         doodleSpace.add(Kefka, 200, 10);
         
     }
+    
+    public void gameUpdate()
+    {
+        this.p1pile.setText("" + eo.getPlayer1());
+        this.pile.setText("" + eo.getPile());
+        this.p2pile.setText("" + eo.getPlayer2());
+        this.title.setText("Player " + eo.playerMove + "'s Move");
+        if (this.eo.isGameOver() == true)
+        {
+            title.setText(this.eo.whoWon() + " wins!");
+        }
+        buttonUpdate();
+    }
+    
+    public void buttonUpdate()
+    {
+        if (this.eo.playerMove == 1)
+        {
+            this.p2take1.setEnabled(false);
+            this.p2take2.setEnabled(false);
+            this.p2take3.setEnabled(false);
+            
+            if (this.eo.pile>=1)
+                this.p1take1.setEnabled(true);
+            if (this.eo.pile>=2)
+                this.p1take2.setEnabled(true);
+            if (this.eo.pile>=3)
+                this.p1take3.setEnabled(true);
+        }
+        else if (this.eo.playerMove == 2)
+        {
+            this.p1take1.setEnabled(false);
+            this.p1take2.setEnabled(false);
+            this.p1take3.setEnabled(false);
+            
+            if (this.eo.pile>=1)
+                this.p2take1.setEnabled(true);
+            if (this.eo.pile>=2)
+                this.p2take2.setEnabled(true);
+            if (this.eo.pile>=3)
+                this.p2take3.setEnabled(true);
+        }
+    }
+
     
     public void actionPerformed(ActionEvent event)
     {
@@ -113,56 +163,48 @@ public class Game extends Program
         if (cmd.equals("p1t1"))
         {
             this.eo.p1move(1);
-            this.p1pile.setText("" + eo.getPlayer1());
-            this.pile.setText("" + eo.getPile());
         } 
         else if (cmd.equals("p1t2"))
         {
             this.eo.p1move(2);
-            this.p1pile.setText("" + eo.getPlayer1());
-            this.pile.setText("" + eo.getPile());
-            
         }
         else if (cmd.equals("p1t3"))
         {
             this.eo.p1move(3);
-            this.p1pile.setText("" + eo.getPlayer1());
-            this.pile.setText("" + eo.getPile());
         }
         else if (cmd.equals("p2t1"))
         {
             this.eo.p2move(1);
-            this.p2pile.setText("" + eo.getPlayer2());
-            this.pile.setText("" + eo.getPile());
         }
         else if(cmd.equals("p2t2"))
         {
             this.eo.p2move(2);
-            this.p2pile.setText("" + eo.getPlayer2());
-            this.pile.setText("" + eo.getPile());
         }
         else if (cmd.equals("p2t3"))
         {
             this.eo.p2move(3);
-            this.p2pile.setText("" + eo.getPlayer2());
-            this.pile.setText("" + eo.getPile());
         }
         else if (cmd.equals("ng"))
         {
-            this.eo= new EvenOdd();
-            this.p1pile.setText("" + eo.getPlayer1());
-            this.p2pile.setText("" + eo.getPlayer2());
-            this.pile.setText("" + eo.getPile());
+            this.resetGame();
         }
         else
         {
             // This should never happen!
         }
-
-        this.title.setText("Player " + eo.playerMove + "'s Move");
-        if (this.eo.isGameOver() == true)
-        {
-            title.setText(this.eo.whoWon() + " wins!");
-        }
+        
+        this.gameUpdate();
+    }
+    
+    /**
+     * Reset all of the variables for testing purposes or a new game.
+     * Player turn is not reset in order to prevent winning streaks
+     */
+    void resetGame ()
+    {
+        this.eo.pile= 15;
+        this.eo.p1= 0;
+        this.eo.p2= 0;
+        buttonUpdate();
     }
 }
