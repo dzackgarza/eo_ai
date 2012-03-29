@@ -11,5 +11,5 @@ comment4.params=event
 comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment5.params=
 comment5.target=void\ resetGame()
-comment5.text=\n\ Reset\ all\ of\ the\ variables\ for\ testing\ purposes\ or\ a\ new\ game.\n\ (Not\ necessary?)\n
+comment5.text=\n\ Reset\ all\ of\ the\ variables\ for\ testing\ purposes\ or\ a\ new\ game.\n\ Player\ turn\ is\ not\ reset\ in\ order\ to\ prevent\ winning\ streaks\n
 numComments=6

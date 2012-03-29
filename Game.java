@@ -27,7 +27,6 @@ public class Game extends Program
     EvenOdd eo;
     
     JLabel title;
-
     
     public Game()
     {
@@ -205,6 +204,16 @@ public class Game extends Program
         this.eo.pile= 15;
         this.eo.p1= 0;
         this.eo.p2= 0;
+        
+        // Losing player always gets first move
+        if (this.eo.winningPlayer==1){
+            this.eo.playerMove = 2;}
+        else if (this.eo.winningPlayer==2){
+            this.eo.playerMove = 1;}
+            
+        //Computer moves automatically if they lost the last game
+        if (this.eo.playerMove==2 && this.eo.computerPlayer==true)
+            this.eo.p2move(this.eo.AIMove());
         buttonUpdate();
     }
 }

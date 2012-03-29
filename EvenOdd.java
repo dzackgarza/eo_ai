@@ -3,7 +3,11 @@ class EvenOdd
     int pile;
     int p1;
     int p2;
-    int playerMove;
+    int playerMove; //Turns - 1: Player 1 || 2: Player 2
+    int winningPlayer; // Used for switching players for new game
+    boolean computerPlayer; // True: AI || False: Human Control
+    int computerDifficulty; // 1: Random || 2: AI
+    
     
     /**
      * Getters
@@ -42,6 +46,9 @@ class EvenOdd
         this.p1= 0;
         this.p2= 0;
         this.playerMove= 1;
+        this.computerPlayer= true;
+        this.winningPlayer = 0;
+        this.computerDifficulty = 1;
     }
     
      /**
@@ -50,11 +57,11 @@ class EvenOdd
     */
     void switchPlayerMove()
     {   
-        if (this.playerMove== 1)
+        if (this.playerMove==1)
         {
             this.playerMove=2;
         }
-        else if (this.playerMove == 2)
+        else
             this.playerMove=1;
     
     }
@@ -82,12 +89,16 @@ class EvenOdd
             this.pile= this.pile - amount;
             this.p1= this.p1 + amount;
             switchPlayerMove();
+            if (computerPlayer=true)
+                p2move(this.AIMove());
             return true;
         }
         else
         {
             return false;
         }
+        
+
     }
     
     
@@ -162,16 +173,17 @@ class EvenOdd
     String whoWon()
     {
         if (this.isGameOver() == true)
-            if (this.p1>this.p2)
-                return "Player 1";
-            else
-                return "Player 2";
+            if (this.p1%2==1){
+                winningPlayer = 1;
+                return "Player 1";}
+            else{
+                winningPlayer = 2;
+                return "Player 2";}
         else
             //Should never happen!
             return "";
     }
-    
-    
+ 
     /**
      * status : none -> String
      * Return a String of the form
@@ -181,5 +193,35 @@ class EvenOdd
     {
         return "Pile: " + this.pile + ", p1: " + this.p1 + ", p2: " + this.p2;
     }
+    
+    /**
+     * Return an integer indicating how many the computer takes.
+     */
+    public int AIMove()
+    {
+        int computerMove = 0;
+        if (this.computerDifficulty == 1)
+        {
+        
+        // Random never picked 3...
+        computerMove = (int) (Math.random()*2.9999999) +1;
+        
+        //Addresses a bug in cases where the AI picks nothing
+        if (computerMove>pile)
+        {
+            computerMove = computerMove - 1;
+            if (computerMove>pile)
+            {
+                computerMove = computerMove - 1;
+            }
+            
+        }
+    }
+    
+        else if (this.computerDifficulty == 2){
+            computerMove=2;}
+    return computerMove;
+    }
+    
     
 }
