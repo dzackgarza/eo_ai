@@ -5,8 +5,12 @@ class EvenOdd
     int p2;
     int playerMove; //Turns - 1: Player 1 || 2: Player 2
     int winningPlayer; // Used for switching players for new game
-    boolean computerPlayer; // True: AI || False: Human Control
+    boolean computerPlayer1; // True: AI || False: Human Control
+    boolean computerPlayer2; // True: AI || False: Human Control
+    boolean isGameOver;
     int computerDifficulty; // 1: Random || 2: AI
+    int trackPlayer1Wins;
+    int trackPlayer2Wins;
     
     
     /**
@@ -46,9 +50,13 @@ class EvenOdd
         this.p1= 0;
         this.p2= 0;
         this.playerMove= 1;
-        this.computerPlayer= true;
+        this.computerPlayer1= true;
+        this.computerPlayer2= true;
         this.winningPlayer = 0;
         this.computerDifficulty = 1;
+        this.trackPlayer1Wins = 0;
+        this.trackPlayer2Wins = 0;
+        this.isGameOver = false;
     }
     
      /**
@@ -89,8 +97,9 @@ class EvenOdd
             this.pile= this.pile - amount;
             this.p1= this.p1 + amount;
             switchPlayerMove();
-            if (computerPlayer=true)
-                p2move(this.AIMove());
+            //if (computerPlayer2=true)
+             //   p2move(this.AIMove());
+             isGameOver();
             return true;
         }
         else
@@ -125,6 +134,9 @@ class EvenOdd
             this.pile= this.pile - amount;
             this.p2= this.p2 + amount;
             switchPlayerMove();
+            isGameOver();
+            //if (computerPlayer1=true)
+             //   p1move(this.AIMove());
             return true;
         }
         else
@@ -139,12 +151,13 @@ class EvenOdd
      * Return whether or not the game is over.
      * 
      */
-    boolean isGameOver()
+    void isGameOver()
     {
-        if (this.pile == 0)
-            return true;
+        if (this.pile == 0){
+            this.isGameOver= true;
+            this.playerMove = 0;}
         else
-            return false;
+            this.isGameOver= false;
     }
     
     /**
@@ -172,12 +185,14 @@ class EvenOdd
      */
     String whoWon()
     {
-        if (this.isGameOver() == true)
+        if (this.isGameOver == true)
             if (this.p1%2==1){
                 winningPlayer = 1;
+                trackPlayer1Wins = trackPlayer1Wins + 1;
                 return "Player 1";}
             else{
                 winningPlayer = 2;
+                trackPlayer2Wins = trackPlayer2Wins + 2;
                 return "Player 2";}
         else
             //Should never happen!

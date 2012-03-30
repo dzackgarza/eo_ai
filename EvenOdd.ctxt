@@ -30,7 +30,7 @@ comment7.params=amount
 comment7.target=boolean\ p2move(int)
 comment7.text=\n\ p2move\ \:\ amount\ (int)\ ->\ boolean\n\ Given\ the\ amount\ to\ move,\ return\ whether\n\ it\ is\ a\ valid\ move\ and\ adjust\ the\ pile\ and\ p2\n\ accordingly.\n\ \n\ EvenOdd\ e\ \=\ new\ EvenOdd();\n\ e.p2move(3)\ ->\ true\n\ e.pile\ ->\ 12\n\ e.p2\ ->\ 3\n\ e.p1\ ->\ 0\n\ e.p2move(5)\ ->\ false\n\ e.pile\ ->\ 12\n\ e.p2\ ->\ 3\n\ e.p1\ ->\ 0\n
 comment8.params=
-comment8.target=boolean\ isGameOver()
+comment8.target=void\ isGameOver()
 comment8.text=\n\ isGameOver\ \:\ none\ ->\ boolean\n\ Return\ whether\ or\ not\ the\ game\ is\ over.\n\ \n
 comment9.params=whichPile
 comment9.target=int\ getPile(int)
