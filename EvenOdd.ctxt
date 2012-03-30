@@ -1,38 +1,35 @@
 #BlueJ class context
 comment0.params=
-comment0.target=int\ getPlayer1()
-comment0.text=\n\ Getters\n
+comment0.target=EvenOdd()
+comment0.text=\n\ Set\ up\ the\ game\!\n\ Set\ the\ initial\ pile\ to\ 15\ and\ the\ players\ to\n\ zero.\n\ \n\ EvenOdd\ e\=\ new\ EvenOdd();\n\ e.pile\ ->\ 15\n\ e.p1\ ->\ 0\n\ e.p2\ ->\ 0\n
 comment1.params=
-comment1.target=int\ getPlayer2()
+comment1.target=void\ switchPlayerMove()
+comment1.text=\n\ switchPlayerMove\:\ none-->none\n\ Alternates\ turns\ between\ the\ players,\ called\ from\ within\ each\ move\ function.\n
 comment10.params=
-comment10.target=java.lang.String\ whoWon()
-comment10.text=\n\ whoWon\ \:\ none\ ->\ int\n\ Return\ 1\ if\ player\ 1\ won,\ 2\ if\ player\ 2\ won,\n\ or\ 0\ if\ no\ one\ has\ won\ yet.\n
+comment10.target=int\ getPile()
 comment11.params=
-comment11.target=java.lang.String\ status()
-comment11.text=\n\ status\ \:\ none\ ->\ String\n\ Return\ a\ String\ of\ the\ form\n\ "pile\:\ 8,\ p1\:\ 3,\ p2\:\ 4"\n
-comment12.params=
-comment12.target=int\ AIMove()
-comment12.text=\n\ Return\ an\ integer\ indicating\ how\ many\ the\ computer\ takes.\n
-comment2.params=
-comment2.target=int\ getPile()
-comment3.params=
-comment3.target=int\ getPlayerMove()
+comment11.target=int\ getPlayerMove()
+comment2.params=amount
+comment2.target=boolean\ p1move(int)
+comment2.text=\n\ p1move\ \:\ amount\ (int)\ ->\ boolean\n\ Given\ the\ amount\ to\ move,\ return\ whether\n\ it\ is\ a\ valid\ move\ and\ adjust\ the\ pile\ and\ p1\n\ accordingly.\n\ \n\ EvenOdd\ e\ \=\ new\ EvenOdd();\n\ e.p1move(3)\ ->\ true\n\ e.pile\ ->\ 12\n\ e.p1\ ->\ 3\n\ e.p2\ ->\ 0\n\ e.p1move(5)\ ->\ false\n\ e.pile\ ->\ 12\n\ e.p1\ ->\ 3\n\ e.p2\ ->\ 0\n
+comment3.params=amount
+comment3.target=boolean\ p2move(int)
+comment3.text=\n\ p2move\ \:\ amount\ (int)\ ->\ boolean\n\ Given\ the\ amount\ to\ move,\ return\ whether\n\ it\ is\ a\ valid\ move\ and\ adjust\ the\ pile\ and\ p2\n\ accordingly.\n\ \n\ EvenOdd\ e\ \=\ new\ EvenOdd();\n\ e.p2move(3)\ ->\ true\n\ e.pile\ ->\ 12\n\ e.p2\ ->\ 3\n\ e.p1\ ->\ 0\n\ e.p2move(5)\ ->\ false\n\ e.pile\ ->\ 12\n\ e.p2\ ->\ 3\n\ e.p1\ ->\ 0\n
 comment4.params=
-comment4.target=EvenOdd()
-comment4.text=\n\ Set\ up\ the\ game\!\n\ Set\ the\ initial\ pile\ to\ 15\ and\ the\ players\ to\n\ zero.\n\ \n\ EvenOdd\ e\=\ new\ EvenOdd();\n\ e.pile\ ->\ 15\n\ e.p1\ ->\ 0\n\ e.p2\ ->\ 0\n
+comment4.target=boolean\ checkGameOver()
+comment4.text=\n\ isGameOver\ \:\ none\ ->\ boolean\n\ Return\ whether\ or\ not\ the\ game\ is\ over.\n\ \n
 comment5.params=
-comment5.target=void\ switchPlayerMove()
-comment5.text=\n\ switchPlayerMove\:\ none-->none\n\ Alternates\ turns\ between\ the\ players,\ called\ from\ within\ each\ move\ function.\n
-comment6.params=amount
-comment6.target=boolean\ p1move(int)
-comment6.text=\n\ p1move\ \:\ amount\ (int)\ ->\ boolean\n\ Given\ the\ amount\ to\ move,\ return\ whether\n\ it\ is\ a\ valid\ move\ and\ adjust\ the\ pile\ and\ p1\n\ accordingly.\n\ \n\ EvenOdd\ e\ \=\ new\ EvenOdd();\n\ e.p1move(3)\ ->\ true\n\ e.pile\ ->\ 12\n\ e.p1\ ->\ 3\n\ e.p2\ ->\ 0\n\ e.p1move(5)\ ->\ false\n\ e.pile\ ->\ 12\n\ e.p1\ ->\ 3\n\ e.p2\ ->\ 0\n
-comment7.params=amount
-comment7.target=boolean\ p2move(int)
-comment7.text=\n\ p2move\ \:\ amount\ (int)\ ->\ boolean\n\ Given\ the\ amount\ to\ move,\ return\ whether\n\ it\ is\ a\ valid\ move\ and\ adjust\ the\ pile\ and\ p2\n\ accordingly.\n\ \n\ EvenOdd\ e\ \=\ new\ EvenOdd();\n\ e.p2move(3)\ ->\ true\n\ e.pile\ ->\ 12\n\ e.p2\ ->\ 3\n\ e.p1\ ->\ 0\n\ e.p2move(5)\ ->\ false\n\ e.pile\ ->\ 12\n\ e.p2\ ->\ 3\n\ e.p1\ ->\ 0\n
+comment5.target=java.lang.String\ whoWon()
+comment5.text=\n\ whoWon\ \:\ none\ ->\ String\n\ Return\ which\ player\ won.\n
+comment6.params=
+comment6.target=int\ AIMove()
+comment6.text=\n\ Return\ an\ integer\ indicating\ how\ many\ the\ computer\ takes.\n\ Computer\ Difficulty\ 1\:\ Random\ pick\n\ Computer\ Difficulty\ 2\:\ Strategic\ pick\n
+comment7.params=whichPile
+comment7.target=int\ getPile(int)
+comment7.text=\n\ Getter\ to\ return\ pile\ values\n\ 1\ -->\ Player\ 1's\ pile\n\ 2\ -->\ Player\ 2's\ pile\n\ 0\ -->\ Amount\ left\ in\ pile\n
 comment8.params=
-comment8.target=void\ isGameOver()
-comment8.text=\n\ isGameOver\ \:\ none\ ->\ boolean\n\ Return\ whether\ or\ not\ the\ game\ is\ over.\n\ \n
-comment9.params=whichPile
-comment9.target=int\ getPile(int)
-comment9.text=\n\ Returns\ pile\ values\n\ 1\ -->\ Player\ 1's\ pile\n\ 2\ -->\ Player\ 2's\ pile\n\ 0\ -->\ Amount\ left\ in\ pile\n
-numComments=13
+comment8.target=int\ getPlayer1()
+comment8.text=\n\ Other\ getters\n
+comment9.params=
+comment9.target=int\ getPlayer2()
+numComments=12

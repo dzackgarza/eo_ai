@@ -70,7 +70,7 @@ public class Game extends Program
         
         this.player1AI= new JButton("P1 AI");
         this.player1AI.setActionCommand("p1ai");
-        this.player2AI= new JButton("P2 AI");
+        this.player2AI= new JButton("Human Opponent");
         this.player2AI.setActionCommand("p2ai");
         this.developAI= new JButton("AI Dev");
         this.developAI.setActionCommand("devai");
@@ -135,8 +135,7 @@ public class Game extends Program
         this.pile.setText("" + eo.getPile());
         this.p2pile.setText("" + eo.getPlayer2());
         this.title.setText("Player " + eo.playerMove + "'s Move");
-        this.eo.isGameOver();
-        if (this.eo.isGameOver == true)
+        if (this.eo.checkGameOver() == true)
         {
             title.setText(this.eo.whoWon() + " wins!");
         }
@@ -197,30 +196,43 @@ public class Game extends Program
         if (cmd.equals("p1t1"))
         {
             this.eo.p1move(1);
+            checkAIMove(1);
+            gameUpdate();
         } 
         else if (cmd.equals("p1t2"))
         {
             this.eo.p1move(2);
+            checkAIMove(1);
+            gameUpdate();
         }
         else if (cmd.equals("p1t3"))
         {
             this.eo.p1move(3);
+            checkAIMove(1);
+            gameUpdate();
         }
         else if (cmd.equals("p2t1"))
         {
             this.eo.p2move(1);
+            checkAIMove(2);
+            gameUpdate();
         }
         else if(cmd.equals("p2t2"))
         {
             this.eo.p2move(2);
+            checkAIMove(2);
+            gameUpdate();
         }
         else if (cmd.equals("p2t3"))
         {
             this.eo.p2move(3);
+            checkAIMove(2);
+            gameUpdate();
         }
         else if (cmd.equals("ng"))
         {
             this.resetGame();
+            this.gameUpdate();
         }
         else if (cmd.equals("p1ai"))
         {
@@ -228,18 +240,40 @@ public class Game extends Program
         }
         else if (cmd.equals("p2ai"))
         {
-            this.eo.computerPlayer2 = true;
+            if (this.eo.computerPlayer2==true)
+            {
+                this.eo.computerPlayer2 = false;
+                this.player2AI.setText("Human Opponent");
+            }
+            else if (this.eo.computerPlayer2==false)
+            {
+                this.eo.computerPlayer2 = true;
+                this.player2AI.setText("Computer Opponent");
+            }
         }
         else if (cmd.equals("devai"))
         {
             developAI();
+            gameUpdate();
         }
         else
         {
             // This should never happen!
         }
         
-        this.gameUpdate();
+
+        
+    }
+    public void checkAIMove(int whichPlayerJustWent)
+    {
+        if (whichPlayerJustWent == 1 && this.eo.computerPlayer2==true)
+        {
+            this.eo.p2move(this.eo.AIMove());
+        }
+        else if (whichPlayerJustWent == 2 && this.eo.computerPlayer1==true)
+        {
+            this.eo.p1move(this.eo.AIMove());
+        }
     }
     
     /**
@@ -259,7 +293,6 @@ public class Game extends Program
         else if (this.eo.winningPlayer==2){
             this.eo.playerMove = 1;}
             
-        //Computer moves automatically if they lost the last game
         buttonUpdate();
     }
     
@@ -267,16 +300,16 @@ public class Game extends Program
     {
         if (this.eo.isGameOver==true);
             this.resetGame();
+            gameUpdate();
         // Holds all possible amounts left in piles
         int [] holdMoves = new int[15];
-        for (int i=0; i<15; i++){
+        /*for (int i=0; i<15; i++){
             holdMoves [i] = i+1;
-        }
+        }*/
         
-        while (this.eo.pile>0){
+        while (this.eo.isGameOver==false){
             this.eo.p1move(this.eo.AIMove());
             this.eo.p2move(this.eo.AIMove());
-            gameUpdate();
         }
         
     }
