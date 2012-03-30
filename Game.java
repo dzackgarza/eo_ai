@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.*;
+import java.awt.*;
 
 
 public class Game extends Program
@@ -41,6 +42,7 @@ public class Game extends Program
         this.gameArea= new TablePanel(6, 3);
         this.Mog = new ImageIcon("Mog.png");
         this.Kefka = new GImage("Kefka.png");
+        Kefka.scale(5);
         
         this.setTitle("Even and Odd Game");
         
@@ -51,14 +53,14 @@ public class Game extends Program
         this.p1Wins= new JLabel("Player 1 Wins: 0");
         this.p2Wins= new JLabel("Player 2 Wins: 0");
 
-        this.p1take1= new JButton("Take 1");
+        this.p1take1= new JButton("Take 1",this.Mog);
         this.p1take1.setActionCommand("p1t1");
-        this.p1take2= new JButton("Take 2");
+        this.p1take2= new JButton("Take 2",this.Mog);
         this.p1take2.setActionCommand("p1t2");
-        this.p1take3= new JButton("Take 3");
+        this.p1take3= new JButton("Take 3",this.Mog);
         this.p1take3.setActionCommand("p1t3");
         
-        this.p2take1= new JButton(this.Mog);
+        this.p2take1= new JButton("Take 1");
         this.p2take1.setActionCommand("p2t1");
         this.p2take1.setEnabled(false);
         this.p2take2= new JButton("Take 2");
@@ -110,7 +112,8 @@ public class Game extends Program
         p2pile.setForeground(Color.green);
         
         doodleSpace= new GCanvas();
-        gameBoard= new VPanel();
+        gameBoard= new VPanel(4,2);
+        doodleSpace.setPreferredSize(new Dimension(this.getWidth(),(this.getHeight()/2)));
         gameBoard.add(doodleSpace);
         gameBoard.add(gameArea);
         
@@ -122,10 +125,17 @@ public class Game extends Program
         
         this.title= new JLabel("Even and Odd!");
 
-
+        this.title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Stencil", Font.BOLD, 16));
-        doodleSpace.add(title);
+        
+        doodleSpace.add(new JLabel("adsdsadsa"));
+        doodleSpace.add(title,gameBoard.getWidth()/2,0);
         doodleSpace.add(Kefka, 200, 10);
+        doodleSpace.add(new JLabel("1"));
+        doodleSpace.add(new JLabel("2"));
+        doodleSpace.add(new JLabel("3"));
+        doodleSpace.add(new JLabel("4"));
+        doodleSpace.add(new JLabel("5"));
         
     }
     
