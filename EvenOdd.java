@@ -1,4 +1,8 @@
 class EvenOdd
+ // TODO: Determine a formula for AIMove
+ //       Clean up directory structure
+ //       Expand to infinitely many players
+ //       Develop AI that runs AIMove randomly that gathers and stores statistics
 {
     int pile;
     int p1;
